@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiAppMinhasCompras.Views.ListaProduto"
              Title="Lista Produto"
-             BackgroundColor="Gray">
+             BackgroundColor="White">
 
     <ContentPage.ToolbarItems >
         <ToolbarItem Text="Somar" Clicked="ToolbarItem_Clicked_1"/>
@@ -16,9 +16,9 @@
                    Placeholder="Busca de Produtos"
                    TextChanged="txt_search_TextChanged"/>
      
-        <ListView x:Name="lst_produtos">
+        <ListView x:Name="lst_produtos" ItemSelected="lst_produtos_ItemSelected_1">
             <ListView.Header>
-                <Grid ColumnDefinitions="*,*,*,*,*,*">
+                <Grid ColumnDefinitions="*,*,*,*,*">
                     <Label Grid.Column="0" Text="ID"/> 
                     <Label Grid.Column="1" Text="Descrição"/>
                     <Label Grid.Column="2" Text="Preço"/>
@@ -33,7 +33,7 @@
                         <ViewCell.ContextActions>
                             <MenuItem Text="Remover" Clicked="MenuItem_Clicked"/>
                         </ViewCell.ContextActions>
-                        <Grid ColumnDefinitions="*,*,*,*,*,*">
+                        <Grid ColumnDefinitions="*,*,*,*,*">
                             <Label Grid.Column="0" Text="{Binding Id}"/>
                             <Label Grid.Column="1" Text="{Binding Descricao}"/>
                             <Label Grid.Column="2" Text="{Binding Preco}"/>

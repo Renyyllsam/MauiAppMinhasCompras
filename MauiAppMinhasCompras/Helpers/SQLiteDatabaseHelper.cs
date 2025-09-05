@@ -1,10 +1,7 @@
 ﻿using SQLite;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-
 using MauiAppMinhasCompras.Models;
 
 namespace MauiAppMinhasCompras.Helpers
@@ -15,35 +12,37 @@ namespace MauiAppMinhasCompras.Helpers
         public SQLiteDatabaseHelper(string path)
         {
             _conn = new SQLiteAsyncConnection(path);
-        
-        
-        _conn.CreateTableAsync<Models.Produto>().Wait();
+            _conn.CreateTableAsync<Produto>().Wait();
         }
-        public Task<int> Insert(Models.Produto p)
+
+        public Task<int> Insert(Produto p)
         {
             return _conn.InsertAsync(p);
+            return _conn.InsertAsync(p);
         }
-        public Task<List<Models.Produto>> Update(Models.Produto p)
+
+        public Task<int> Update(Produto p)
         {
-            string sql = "UPDATE Produto SET Descricao=?, Quantidade=?, Preco=? WHERE Id=?";
-            return _conn.QueryAsync<Models.Produto>(
-            sql, p.Descricao, p.Quantidade, p.Preco, p.Id
-            );
+            // Corrigido: Update deve usar UpdateAsync
+            return _conn.UpdateAsync(p);
         }
+
         public Task<int> Delete(int id)
         {
-            return _conn.Table<Models.Produto>().DeleteAsync(i => i.Id == id);
+            return _conn.Table<Produto>().DeleteAsync(i => i.Id == id);
         }
-        public Task<List<Models.Produto>> GetAll()
+
+        public Task<List<Produto>> GetAll()
         {
-            return _conn.Table<Models.Produto>().ToListAsync();
+            return _conn.Table<Produto>().ToListAsync();
         }
-        public Task<List<Models.Produto>> Search(string q)
+
+        public Task<List<Produto>> Search(string q)
         {
-            string sql = "SELECT * Produto WHERE descricao LIKE '%" + q + "%'";
-            return _conn.QueryAsync<Models.Produto>(sql);
+            // Corrigido: sintaxe SQL correta e uso de parâmetro seguro
+            string sql = "SELECT * FROM Produto WHERE Descricao LIKE ?";
+            return _conn.QueryAsync<Produto>(sql, $"%{q}%");
         }
     }
 }
-    
 
