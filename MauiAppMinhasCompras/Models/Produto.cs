@@ -4,12 +4,11 @@ namespace MauiAppMinhasCompras.Models
 {
     public class Produto
     {
-        private string _descricao = string.Empty; // Corrigido: inicialização para evitar CS8618
-
+        private string _descricao = string.Empty; 
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
 
-        public string Descricao // Corrigido: propriedade única, removido duplicidade
+        public string Descricao 
         {
             get => _descricao;
             set
@@ -25,5 +24,7 @@ namespace MauiAppMinhasCompras.Models
         public double Quantidade { get; set; }
         public double Preco { get; set; }
         public double Total { get => Quantidade * Preco; }
+
+        public string Categoria { get; set; } 
     }
 }

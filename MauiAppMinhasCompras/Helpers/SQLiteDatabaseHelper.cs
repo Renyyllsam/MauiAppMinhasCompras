@@ -23,7 +23,7 @@ namespace MauiAppMinhasCompras.Helpers
 
         public Task<int> Update(Produto p)
         {
-            // Corrigido: Update deve usar UpdateAsync
+           
             return _conn.UpdateAsync(p);
         }
 
@@ -39,7 +39,7 @@ namespace MauiAppMinhasCompras.Helpers
 
         public Task<List<Produto>> Search(string q)
         {
-            // Corrigido: sintaxe SQL correta e uso de parâmetro seguro
+           
             string sql = "SELECT * FROM Produto WHERE Descricao LIKE ?";
             return _conn.QueryAsync<Produto>(sql, $"%{q}%");
         }
